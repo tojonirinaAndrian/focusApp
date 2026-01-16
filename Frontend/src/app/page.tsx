@@ -9,7 +9,11 @@ import HistoryComponent from "../components/history";
 
 export default function Page() {
 	const router = useRouter();
-	const {whereIsGlobal, isBreakOrSession, startModalVisible} = useGlobalStore();
+	const {whereIsGlobal, isBreakOrSession, startModalVisible,
+		setTodaysAccumulatedSeconds
+	} = useGlobalStore();
+	// We should verify here if the last saved data of the person is from yesterday or not
+	// If it is, the we setTodaysAccumulatedSeconds (0) and startSaving fromTodays.
 	return(
 		<>
 		<div className={"w-full h-[100dvh] " + (isBreakOrSession === "session" ? "bg-beigeAccent" : "bg-blueAccent ")}>

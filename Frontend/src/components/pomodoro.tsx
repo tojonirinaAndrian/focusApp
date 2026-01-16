@@ -25,6 +25,8 @@ export default function PomodoroComponent () {
     }
     const [todaysStreak, setTodaysStreak] = useState<number>(convertToMinutes(todaysAccumulatedSeconds));
     useEffect(() => {
+        // We should add logic that cheks day here if the number is the same, if not we restore streak and accumulated To zero,
+        // Also we edit in realtime the database  with websocket.
         setTodaysStreak(convertToMinutes(todaysAccumulatedSeconds));
     }, [todaysAccumulatedSeconds]);
 

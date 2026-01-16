@@ -14,7 +14,7 @@ export default function HistoryComponent () {
     return (<div className="w-full h-full flex justify-center items-center">
         <div className="p-2 h-[80dvh] w-[80dvh] bg-white shadow-md rounded-md mt-10 space-y-1 overflow-auto">
             <div className="w-full rounded-sm flex justify-between p-3 bg-blueAccent/10 text-black/80">
-                <p>{"Today's session"}</p>
+                <p>{"Today's streak"}</p>
                 <p>{convertToMinutes(todaysAccumulatedSeconds) + " minute(s)"}</p>
             </div>
         </div>
