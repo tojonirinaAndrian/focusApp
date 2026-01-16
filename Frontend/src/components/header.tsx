@@ -1,6 +1,6 @@
 "use client";
 import { useGlobalStore } from "@/store/use-global-store";
-import { Calendar, History, Settings, Timer, X } from "lucide-react"
+import { Calendar, History, Settings, Timer, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import SettingsComponent from "./settings";
 

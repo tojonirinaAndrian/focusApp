@@ -4,7 +4,7 @@ import { useGlobalStore } from "@/store/use-global-store";
 
 export default function SettingsComponent () {
     const { setDefaultSessionDuration, isPaused , defaultSessionDuration, resetTimer, setDefaultBreakDuration, defaultBreakDuration } = useGlobalStore();
-    return (<div className="rounded-md p-3 bg-white shadow-md gap-2 flex flex-col">
+    return (<div className="rounded-md p-2 bg-white shadow-md gap-2 flex flex-col">
         {isPaused && <div className="w-full p-2 text-center rounded-sm bg-beigeAccent/50">
             Paused
         </div>}
