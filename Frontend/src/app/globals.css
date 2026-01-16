@@ -33,30 +33,16 @@
 @theme {
   --color-black : #121212;
   --color-lightCream : #fff;
-  --color-blueDianne : #0C3D48;
+  --color-beigeAccent : #ccb089;
+  --color-blueAccent : #89a5cc;
 }
 * {
   transition-duration: 0.3s;
-  font-family: 'GeneralSans'
+  font-family: 'Kalamayka'
 }
 
-body {
-  @apply text-black text-base bg-lightCream;
-}
-h1 {
-  letter-spacing: -0.1rem;
-  @apply text-4xl sm:text-6xl font-semibold capitalize;
-}
-h2 {
-  letter-spacing: -0.5%;
-  @apply text-2xl sm:text-3xl font-medium;
-}
-h3 {
-  @apply text-xl font-medium;
-
-}
-.nav li {
-  @apply hover:underline hover:text-black/50
+.whiteButton {
+  @apply items-center shadow-md flex p-2 rounded-md bg-white gap-1 cursor-pointer
 }
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
