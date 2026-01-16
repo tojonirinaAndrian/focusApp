@@ -2,7 +2,7 @@
 
 import { useGlobalStore } from "@/store/use-global-store";
 import { Pause, Play, RotateCcw } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function PomodoroComponent () {
     const { 
@@ -13,19 +13,36 @@ export default function PomodoroComponent () {
         resetTimer
     } = useGlobalStore();
     const interval = useRef<any>(null);
+    
+    const convertToMinutes = (seconds: number) => {
+        let convertedToMins: number = 0;
+        while (seconds >= 0) {
+            seconds -= 60;
+            if (seconds < 0) break;
+            convertedToMins++;
+        }
+        return convertedToMins;
+    }
+    const [todaysStreak, setTodaysStreak] = useState<number>(convertToMinutes(todaysAccumulatedSeconds));
+    useEffect(() => {
+        setTodaysStreak(convertToMinutes(todaysAccumulatedSeconds));
+    }, [todaysAccumulatedSeconds]);
+
     useEffect(() => {
         if (pomodoroIsPlaying === false) {
             clearInterval(interval.current);
         } else {
             let mockSec: number = (currentPomodoroSeconds <= 0) ? 60 : currentPomodoroSeconds;
             let mockMin: number = currentPomodoroMinutes;
+            let accumulated: number = todaysAccumulatedSeconds;
             interval.current = setInterval (() => {
                 if (mockSec === 0) {
                     mockSec = 60;
                 }
                 mockSec--;
                 if (isBreakOrSession === "session") {
-                    setTodaysAccumulatedSeconds(todaysAccumulatedSeconds + 1);
+                    accumulated++;
+                    setTodaysAccumulatedSeconds(accumulated);
                 }
                 if (mockSec === 59) {
                     mockMin--;
@@ -88,6 +105,8 @@ export default function PomodoroComponent () {
                     </button>}
                 </nav>
             </div>
+            <p className="text-center text-black/80">{"Today's streak : " + todaysStreak + " minute(s)"} 
+            </p>
         </div>
         
     </div>        
