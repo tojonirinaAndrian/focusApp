@@ -20,7 +20,7 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm">minutes</p>
+                <p className="text-sm text-black/80">minutes</p>
             </div>
         </div>
         <div className="space-y-1 bg-blueAccent/10 rounded-sm p-2">
@@ -35,7 +35,7 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm">minutes</p>
+                <p className="text-sm text-black/80">minutes</p>
             </div>
         </div>
     </div>)

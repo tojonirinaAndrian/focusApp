@@ -22,7 +22,9 @@ interface useStoreProps {
 	isBreakOrSession: "break" | "session",
 	setIsBreakOrSession: (arg0: "break" | "session") => void,
 	startModalVisible: (boolean),
-	setStartModalVisible: (arg0: boolean) => void
+	setStartModalVisible: (arg0: boolean) => void,
+	todaysAccumulatedSeconds: number,
+	setTodaysAccumulatedSeconds: (arg0: number) => void
 }
 
 export const useGlobalStore = create<useStoreProps>() (
@@ -117,7 +119,15 @@ export const useGlobalStore = create<useStoreProps>() (
 						}
 					}
 				})
-			}
+			},
+			todaysAccumulatedSeconds: 0,
+			setTodaysAccumulatedSeconds: (howMuchTime: number) => {
+				set(() => {
+					return ({
+						todaysAccumulatedSeconds: howMuchTime
+					})
+				})
+			},
 		}), {
 			name : 'global'
 		}

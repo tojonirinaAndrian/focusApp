@@ -9,7 +9,7 @@ export default function PomodoroComponent () {
         isBreakOrSession, setIsBreakOrSession, setStartModalVisible,
         defaultSessionDuration, pomodoroIsPlaying, setIsPlaying, 
         currentPomodoroMinutes, currentPomodoroSeconds, setPomodoro,
-        setIsPaused, isPaused,
+        setIsPaused, isPaused, setTodaysAccumulatedSeconds, todaysAccumulatedSeconds,
         resetTimer
     } = useGlobalStore();
     const interval = useRef<any>(null);
@@ -17,15 +17,20 @@ export default function PomodoroComponent () {
         if (pomodoroIsPlaying === false) {
             clearInterval(interval.current);
         } else {
-            let mockSec: number = (currentPomodoroSeconds === 0) ? 60 : currentPomodoroSeconds;
+            let mockSec: number = (currentPomodoroSeconds <= 0) ? 60 : currentPomodoroSeconds;
             let mockMin: number = currentPomodoroMinutes;
             interval.current = setInterval (() => {
+                if (mockSec === 0) {
+                    mockSec = 60;
+                }
                 mockSec--;
-                setPomodoro(mockMin, mockSec);
+                if (isBreakOrSession === "session") {
+                    setTodaysAccumulatedSeconds(todaysAccumulatedSeconds + 1);
+                }
                 if (mockSec === 59) {
-                    mockMin--
-                    setPomodoro(mockMin, mockSec);
+                    mockMin--;
                 };
+                setPomodoro(mockMin, mockSec);
                 if (mockMin === 0 && mockSec === 0) {
                     clearInterval(interval.current);
                     setIsPlaying(false);
@@ -70,16 +75,17 @@ export default function PomodoroComponent () {
                             <Play size={20}/>
                     </button>                
                     </>}
-                    <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200"} onClick={
-                        () => !pomodoroIsPlaying && resetTimer()
-                    }>
-                        <RotateCcw size={20}/>
-                    </button>
                     {isBreakOrSession === "break" ? <button onClick={() => {
+                        setIsPlaying(false);
+                        setIsPaused(true);
                         setStartModalVisible(true);
                     }} >
                         End break
-                    </button>:<></>}
+                    </button> : <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} onClick={
+                        () => !pomodoroIsPlaying && resetTimer()
+                    }>
+                        <RotateCcw size={20}/>
+                    </button>}
                 </nav>
             </div>
         </div>

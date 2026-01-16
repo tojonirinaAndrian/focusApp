@@ -5,6 +5,7 @@ import { useGlobalStore } from "@/store/use-global-store";
 import PomodoroComponent from "../components/pomodoro";
 import StartBreakModalComponent from "../components/startModal";
 import { StartSessionModalComponent } from "../components/startModal";
+import HistoryComponent from "../components/history";
 
 export default function Page() {
 	const router = useRouter();
@@ -15,6 +16,9 @@ export default function Page() {
 			<HeaderComponent />
 			{whereIsGlobal === "pomodoro" && <>
 				<PomodoroComponent />
+			</>}
+			{whereIsGlobal === "history" && <>
+				<HistoryComponent />
 			</>}
 		</div>
 		{(isBreakOrSession === "session" && startModalVisible) && <StartBreakModalComponent />}	

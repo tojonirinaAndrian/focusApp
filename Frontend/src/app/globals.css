@@ -2,41 +2,10 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-@font-face {
-  font-family: "InterTight";
-  src: url("/fonts/InterTight.ttf");
-}
+
 @font-face {
   font-family: "BoldPixels";
   src: url("/fonts/BoldPixels.ttf");
-}
-@font-face {
-  font-family: "Avenixel";
-  src: url("/fonts/Avenixel-Regular.ttf");
-}
-@font-face {
-  font-family: "Brunson";
-  src: url("/fonts/Brunson.ttf");
-}
-@font-face {
-  font-family: "GeneralSans";
-  src: url("/fonts/GeneralSans.ttf");
-}
-@font-face {
-  font-family: "ClashDisplay";
-  src: url("/fonts/ClashDisplay.ttf");
-}
-@font-face {
-  font-family: "Unifix";
-  src: url("/fonts/Unifix.otf");
-}
-@font-face {
-  font-family: "WorkSans";
-  src: url("/fonts/WorkSans.ttf");
-}
-@font-face {
-  font-family: 'Kalamayka';
-  src: url("/fonts/Kalamayka.woff2");
 }
 @theme {
   --color-black : #121212;
@@ -46,7 +15,7 @@
 }
 * {
   transition-duration: 0.3s;
-  font-family: 'Avenixel'
+  font-family: 'BoldPixels'
 }
 
 .whiteButton {
