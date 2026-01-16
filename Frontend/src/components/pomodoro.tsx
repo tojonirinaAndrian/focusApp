@@ -38,7 +38,7 @@ export default function PomodoroComponent () {
     return (<>
     <div className="w-full h-full flex items-center justify-center">
         <div className="w-fit flex flex-col gap-5">
-            <div className="flex font-bold text-9xl gap-5">
+            <div className="flex font-medium text-9xl gap-5">
                 <p>
                     {String(currentPomodoroMinutes).length === 1 ? "0" : ""}
                     {currentPomodoroMinutes}

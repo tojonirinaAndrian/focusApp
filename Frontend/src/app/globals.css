@@ -7,6 +7,14 @@
   src: url("/fonts/InterTight.ttf");
 }
 @font-face {
+  font-family: "BoldPixels";
+  src: url("/fonts/BoldPixels.ttf");
+}
+@font-face {
+  font-family: "Avenixel";
+  src: url("/fonts/Avenixel-Regular.ttf");
+}
+@font-face {
   font-family: "Brunson";
   src: url("/fonts/Brunson.ttf");
 }
@@ -38,7 +46,7 @@
 }
 * {
   transition-duration: 0.3s;
-  font-family: 'Kalamayka'
+  font-family: 'Avenixel'
 }
 
 .whiteButton {
