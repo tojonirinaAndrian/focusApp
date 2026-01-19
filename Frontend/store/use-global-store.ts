@@ -1,6 +1,5 @@
 'use client';
 
-import { setFips } from 'crypto';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -24,7 +23,13 @@ interface useStoreProps {
 	startModalVisible: (boolean),
 	setStartModalVisible: (arg0: boolean) => void,
 	todaysAccumulatedSeconds: number,
-	setTodaysAccumulatedSeconds: (arg0: number) => void
+	setTodaysAccumulatedSeconds: (arg0: number) => void,
+	cycleNumber: number,
+	setCycleNumber: (arg0: number) => void,
+	defaultLongBreakDuration: number,
+	setDefaultLongBreakDuration: (arg0: number) => void,
+	currentDoneCycle: number,
+	setCurrentDoneCycle: (arg0: number) => void
 }
 
 export const useGlobalStore = create<useStoreProps>() (
@@ -54,6 +59,14 @@ export const useGlobalStore = create<useStoreProps>() (
 				set(() => {
 					return {
 						defaultBreakDuration: minutes
+					}
+				})
+			},
+			defaultLongBreakDuration: 1,
+			setDefaultLongBreakDuration: (minutes) => {
+				set(() => {
+					return {
+						defaultLongBreakDuration: minutes
 					}
 				})
 			},
@@ -125,6 +138,22 @@ export const useGlobalStore = create<useStoreProps>() (
 				set(() => {
 					return ({
 						todaysAccumulatedSeconds: howMuchTime
+					})
+				})
+			},
+			cycleNumber: 2,
+			setCycleNumber: (cycleNumber: number) => {
+				set(() => {
+					return ({
+						cycleNumber: cycleNumber
+					})
+				})
+			},
+			currentDoneCycle: 0,
+			setCurrentDoneCycle: (doneCycle: number) => {
+				set(() => {
+					return ({
+						currentDoneCycle : doneCycle
 					})
 				})
 			},
