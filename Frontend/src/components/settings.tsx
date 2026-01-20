@@ -25,11 +25,11 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm text-black/80">minutes</p>
+                <p className="text-sm text-black/80">{"minute(s)"}</p>
             </div>
         </div>
         <div className="space-y-1 bg-blueAccent/10 rounded-sm p-2">
-            <p className="">Break duration</p>
+            <p className="">Short break duration</p>
             <div className="flex gap-2 items-center">
                 <input min={1} className="w-[100px] px-2 py-0.5 border-black/50 border rounded-md" type="number" defaultValue={defaultBreakDuration} 
                 onChange={(e) => {
@@ -40,11 +40,11 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm text-black/80">minutes</p>
+                <p className="text-sm text-black/80">{"minute(s)"}</p>
             </div>
         </div>
         <div className="space-y-1 bg-beigeAccent/10 rounded-sm p-2">
-            <p className="">Cycle Number</p>
+            <p className="">Cycle number</p>
             <div className="flex gap-2 items-center">
                 <input min={1} className="w-[100px] px-2 py-0.5 border-black/50 border rounded-md" type="number" defaultValue={cycleNumber} 
                 onChange={(e) => {
@@ -55,11 +55,11 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm text-black/80">cycles</p>
+                <p className="text-sm text-black/80">{"cycle(s)"}</p>
             </div>
         </div>
         <div className="space-y-1 bg-blueAccent/10 rounded-sm p-2">
-            <p className="">Long Break duration</p>
+            <p className="">Long break duration</p>
             <div className="flex gap-2 items-center">
                 <input min={1} className="w-[100px] px-2 py-0.5 border-black/50 border rounded-md" type="number" defaultValue={defaultLongBreakDuration} 
                 onChange={(e) => {
@@ -70,7 +70,7 @@ export default function SettingsComponent () {
                     }
                     !isPaused && resetTimer();
                 }}/>
-                <p className="text-sm text-black/80">minutes</p>
+                <p className="text-sm text-black/80">{"minute(s)"}</p>
             </div>
         </div>
     </div>)
