@@ -5,7 +5,7 @@ interface cycleResetInterface {
 }
 
 export default function CycleResetComponent (props: cycleResetInterface) {
-    const {setCurrentDoneCycle, resetTimer, setIsPlaying, setIsPaused} = useGlobalStore()
+    const {setCurrentDoneCycle, resetTimer, setIsPlaying, setIsPaused, currentDoneCycle, cycleNumber} = useGlobalStore()
     return <>
     <div className="w-full h-[100dvh] top-0 fixed z-5 bg-black/80 flex items-center">
         <div className="bg-white w-[85%] md:w-[30vw] space-y-5 rounded-md m-auto p-3 shadow-md text-center">
@@ -13,7 +13,9 @@ export default function CycleResetComponent (props: cycleResetInterface) {
                 <p className=" text-xl uppercase">WHAT ?</p>
                 <div className="w-[50%] h-[1px] bg-black/70 m-auto"></div>
             </div>
-            <p className="text-black/80">Do you really want to reset the cycle streak ?</p>
+            <p className="text-black/80">
+                Do you really want to reset your current cycle streak {`(${currentDoneCycle}/${cycleNumber})`} ?
+            </p>
             <div 
                 className={`flex w-full gap-1 *:rounded-sm *:p-2 *:cursor-pointer`}
             >
