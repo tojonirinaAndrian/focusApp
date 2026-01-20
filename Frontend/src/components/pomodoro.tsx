@@ -109,13 +109,28 @@ export default function PomodoroComponent () {
                         setIsPaused(true);
                         setStartModalVisible(true);
                     }}>
-                        End break
-                    </button> : <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
-                    onClick = {
-                        () => !pomodoroIsPlaying && resetTimer()
-                    }>
-                        <RotateCcw size={20}/>
-                    </button>}
+                        Skip break
+                    </button> : <>
+                        <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
+                        onClick = {
+                            () => !pomodoroIsPlaying && resetTimer()
+                        }>
+                            <RotateCcw size={20}/>
+                        </button>
+                        {(currentDoneCycle > 0) && <>
+                            <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
+                            onClick = {
+                                () => {
+                                    if (!pomodoroIsPlaying) {
+                                        resetTimer();
+                                        setCurrentDoneCycle(0);
+                                    }
+                                }
+                            }>
+                                End cycle streak
+                            </button>
+                        </>}
+                    </>}
                 </nav>
             </div>
         </div>
