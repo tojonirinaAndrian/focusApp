@@ -18,8 +18,8 @@ interface useStoreProps {
 	resetTimer: () => void,
 	defaultBreakDuration: number,
 	setDefaultBreakDuration: (arg0: number) => void,
-	isBreakOrSession: "break" | "session",
-	setIsBreakOrSession: (arg0: "break" | "session") => void,
+	isBreakOrSession: "break" | "session" | "longBreak",
+	setIsBreakOrSession: (arg0: "break" | "session" | "longBreak") => void,
 	startModalVisible: (boolean),
 	setStartModalVisible: (arg0: boolean) => void,
 	todaysAccumulatedSeconds: number,
@@ -112,25 +112,33 @@ export const useGlobalStore = create<useStoreProps>() (
 					}
 				})
 			},
-			setIsBreakOrSession: (what: "break" | "session") => {
+			setIsBreakOrSession: (what: "break" | "session" | "longBreak") => {
 				set(() => {
-					get().setIsPaused(false);
 					if (what === "break") {
 						return {
 							pomodoroIsPlaying: false,
+							isPaused:false,
 							currentPomodoroMinutes: get().defaultBreakDuration,
 							currentPomodoroSeconds: 0,
 							isBreakOrSession: what
 						}
-					}
-					else {
+					} else if (what === "longBreak") {
 						return {
+							pomodoroIsPlaying: false,
+							isPaused:false,
+							currentPomodoroMinutes: get().defaultLongBreakDuration,
+							currentPomodoroSeconds: 0,
+							isBreakOrSession: what
+						}
+					} else {
+						return {
+							isPaused:false,
 							pomodoroIsPlaying: false,
 							currentPomodoroMinutes: get().defaultSessionDuration,
 							currentPomodoroSeconds: 0,
 							isBreakOrSession: what
 						}
-					}
+					};
 				})
 			},
 			todaysAccumulatedSeconds: 0,

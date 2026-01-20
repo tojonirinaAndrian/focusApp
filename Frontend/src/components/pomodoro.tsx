@@ -10,9 +10,10 @@ export default function PomodoroComponent () {
         defaultSessionDuration, pomodoroIsPlaying, setIsPlaying, 
         currentPomodoroMinutes, currentPomodoroSeconds, setPomodoro,
         setIsPaused, isPaused, setTodaysAccumulatedSeconds, todaysAccumulatedSeconds,
-        setCurrentDoneCycle, currentDoneCycle,
+        setCurrentDoneCycle, currentDoneCycle, cycleNumber, setCycleNumber,
         resetTimer
     } = useGlobalStore();
+
     const interval = useRef<any>(null);
     
     const convertToMinutes = (seconds: number) => {
@@ -23,10 +24,11 @@ export default function PomodoroComponent () {
             convertedToMins++;
         }
         return convertedToMins;
-    }
+    };
+
     const [todaysStreak, setTodaysStreak] = useState<number>(convertToMinutes(todaysAccumulatedSeconds));
-    useEffect(() => {
-        
+    
+    useEffect(() => {    
         setTodaysStreak(convertToMinutes(todaysAccumulatedSeconds));
     }, [todaysAccumulatedSeconds]);
 
@@ -40,12 +42,12 @@ export default function PomodoroComponent () {
             interval.current = setInterval (() => {
                 if (mockSec === 0) {
                     mockSec = 60;
-                }
+                };
                 mockSec--;
                 if (isBreakOrSession === "session") {
                     accumulated++;
                     setTodaysAccumulatedSeconds(accumulated);
-                }
+                };
                 if (mockSec === 59) {
                     mockMin--;
                 };
@@ -54,6 +56,9 @@ export default function PomodoroComponent () {
                     clearInterval(interval.current);
                     setIsPlaying(false);
                     setStartModalVisible(true);
+                    if (isBreakOrSession === "session") {
+                        setCurrentDoneCycle(currentDoneCycle + 1);
+                    }
                 };
             }, 1000)
         }
@@ -94,13 +99,14 @@ export default function PomodoroComponent () {
                             <Play size={20}/>
                     </button>                
                     </>}
-                    {isBreakOrSession === "break" ? <button onClick={() => {
+                    {((isBreakOrSession === "break") || (isBreakOrSession === "longBreak")) ? <button onClick={() => {
                         setIsPlaying(false);
                         setIsPaused(true);
                         setStartModalVisible(true);
-                    }} >
+                    }}>
                         End break
-                    </button> : <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} onClick={
+                    </button> : <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
+                    onClick = {
                         () => !pomodoroIsPlaying && resetTimer()
                     }>
                         <RotateCcw size={20}/>
