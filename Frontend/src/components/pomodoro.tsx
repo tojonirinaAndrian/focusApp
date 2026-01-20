@@ -3,6 +3,8 @@
 import { useGlobalStore } from "@/store/use-global-store";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import CycleResetComponent from "./cycleReset";
+import TimerResetComponent from "./timerReset";
 
 export default function PomodoroComponent () {
     const { 
@@ -15,7 +17,8 @@ export default function PomodoroComponent () {
     } = useGlobalStore();
 
     const interval = useRef<any>(null);
-    
+    const [cycleReset, setCycleReset] = useState<boolean>(false);
+    const [timerReset, setTimerReset] = useState<boolean>(false);
     const convertToMinutes = (seconds: number) => {
         let convertedToMins: number = 0;
         while (seconds >= 0) {
@@ -113,28 +116,24 @@ export default function PomodoroComponent () {
                     </button> : <>
                         <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
                         onClick = {
-                            () => !pomodoroIsPlaying && resetTimer()
+                            () => !pomodoroIsPlaying && setTimerReset(true)
                         }>
                             <RotateCcw size={20}/>
                         </button>
                         {(currentDoneCycle > 0) && <>
                             <button className={(pomodoroIsPlaying ? " opacity-20 " : "") + "hover:!bg-red-200 hover:text-red-600"} 
                             onClick = {
-                                () => {
-                                    if (!pomodoroIsPlaying) {
-                                        resetTimer();
-                                        setCurrentDoneCycle(0);
-                                    }
-                                }
+                                () => !pomodoroIsPlaying && setCycleReset(true)
                             }>
-                                End cycle streak
+                                Reset cycle streak
                             </button>
                         </>}
                     </>}
                 </nav>
             </div>
         </div>
-        
-    </div>        
+    </div>
+    {cycleReset && <CycleResetComponent setCycleReset={setCycleReset}/>}
+    {timerReset && <TimerResetComponent setTimerReset={setTimerReset}/>}
     </>)
 }
