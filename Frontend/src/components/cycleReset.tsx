@@ -16,9 +16,7 @@ export default function CycleResetComponent (props: cycleResetInterface) {
             <p className="text-black/80">
                 Do you really want to reset your current cycle streak {`(${currentDoneCycle}/${cycleNumber})`} ?
             </p>
-            <div 
-                className={`flex w-full gap-1 *:rounded-sm *:p-2 *:cursor-pointer`}
-            >
+            <div className={`flex w-full gap-1 *:rounded-sm *:p-2 *:cursor-pointer`}>
                 <button className="bg-beigeAccent/50 hover:bg-beigeAccent/80 w-full"
                 onClick={() => {
                     setIsPaused(false);
