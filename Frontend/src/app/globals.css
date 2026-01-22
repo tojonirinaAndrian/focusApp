@@ -7,6 +7,12 @@
   font-family: "BoldPixels";
   src: url("/fonts/BoldPixels.ttf");
 }
+
+@font-face {
+  font-family: "Avenixel";
+  src: url("/fonts/Avenixel-Regular.tsx");
+}
+
 @theme {
   --color-black : #121212;
   --color-greenAccent: #bbcc8b;
