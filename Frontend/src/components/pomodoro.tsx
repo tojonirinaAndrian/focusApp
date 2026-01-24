@@ -75,7 +75,7 @@ export default function PomodoroComponent () {
                 {isBreakOrSession === "break" && `Short break`}
                 {isBreakOrSession === "session" && `Cycle : ${currentDoneCycle}/${cycleNumber}`}
             </p>
-            <div className="flex font-medium text-9xl gap-5">
+            <div className="flex font-medium text-9xl gap-5 items-center">
                 <p>
                     {String(currentPomodoroMinutes).length === 1 ? "0" : ""}
                     {currentPomodoroMinutes}

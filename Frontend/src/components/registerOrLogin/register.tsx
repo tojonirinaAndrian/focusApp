@@ -26,20 +26,20 @@ export default function RegisterComponent () {
     const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
     const [isThereErrors, setIsThereErrors] = useState<boolean>(false);
     const [username, setUsername] = useState<string>("");
-    const [usernameError, setUsernameError] = useState<boolean>(false);
+    const [usernameError, setUsernameError] = useState<string>("");
     const [isContinuing, startContinuing] = useTransition();
     const onContinuingClick = () => {
         startContinuing (() => {
-            // await from the backend   
+            // await from the backend
         });
     };
     const continuingConditions: boolean = ((email.length > 0) && (password.length > 0) && (isThereErrors === false) && (username.length > 0));
     const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value: string = e.target.value;
-        if (value.length <= 1) {
-            setUsernameError (true);
+        if (value.length <= 0) {
+            setUsernameError("Fill the field");
         } else {
-            setUsernameError (false);
+            setUsernameError("");
             setUsername(value);
         }
     }
@@ -82,8 +82,8 @@ export default function RegisterComponent () {
                 onChange={(e) => onUsernameChange(e)}
                 className="border rounded-sm p-1 px-2 w-full"
             />
-            {usernameError && <p className="mx-2 text-sm text-red-500">
-                * Fill this field  
+            {usernameError.length > 0 && <p className="mx-2 text-sm text-red-500">
+                * {usernameError}  
             </p>}
         </div>
         <div className="space-y-1">
@@ -127,6 +127,6 @@ export default function RegisterComponent () {
                 onContinuingClick();
             }
         }}
-    >{isContinuing ? "Continuing" : "Continue"}</button>
+    >{isContinuing ? "Continuing..." : "Continue"}</button>
     </>
 }

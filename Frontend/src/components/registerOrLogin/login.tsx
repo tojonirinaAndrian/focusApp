@@ -17,13 +17,14 @@ const passwordSchema = z
 .refine((val) => /\d/.test(val), "Password must contain a number")
 .refine((val) => /[^A-Za-z0-9]/.test(val), "Password must contain a special character");
 
-
 export default function LoginComponent () {
     const [isContinuing, startContinuing] = useTransition();
     const onContinuingClick = () => {
         startContinuing (() => {
-            // await from the backend   
+            // await from the backend
+            console.log(isContinuing);
         });
+        console.log(isContinuing);
     };
 
     const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +108,6 @@ export default function LoginComponent () {
                 onContinuingClick();
             }
         }}
-    >{isContinuing ? "Continuing" : "Continue"}</button>
+    >{isContinuing ? "Continuing..." : "Continue"}</button>
     </>
 }

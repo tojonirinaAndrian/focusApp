@@ -1,6 +1,7 @@
 'use client';
 import LoginComponent from "@/src/components/registerOrLogin/login";
 import RegisterComponent from "@/src/components/registerOrLogin/register";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState, useTransition } from "react";
 
 export default function Page() {
@@ -11,12 +12,21 @@ export default function Page() {
             // await from the backend   
         });
     };
-
+    const router = useRouter();
+    const [redirectingBack, startRedirectingBack] = useTransition();
     return <>
-    <div className="w-full p-10 bg-beigeAccent min-h-[100dvh] h-full flex items-center">
-        <div className="m-auto rounded-sm bg-white shadow-sm md:w-[30%] sm:w-[60%] w-[95%] p-5 space-y-5">
+    <div className="w-full p-5 bg-beigeAccent min-h-[100dvh] h-full flex items-center">
+        
+        <div className={`m-auto rounded-sm bg-white shadow-md md:w-[40dvw] sm:w-[60dvw] w-[90dvw] p-5 space-y-5`}>
+            <button className={`p-2 rounded-sm bg-beigeAccent/30 hover:bg-beigeAccent/80 cursor-pointer ${redirectingBack && " opacity-30 "}`}
+            onClick={() => {
+                startRedirectingBack(() => {
+                    router.push("/")
+                })
+            }}
+            >Back to timer</button>
             <div className="text-center px-5">
-                <h3 className="text-3xl">FOCUS</h3>
+                <h3 className="text-3xl">{where === "login" ? "LOG IN and " : "SIGN UP and "}FOCUS</h3>
                 <p className="text-black/80">Focus will never be a struggle again.</p>
             </div>
             {where === "login" ? 
