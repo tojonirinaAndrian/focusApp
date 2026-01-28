@@ -20,7 +20,7 @@ export default function HeaderComponent () {
 
     return (
         <>
-        <header className="p-5 w-full justify-between flex fixed top-0">
+        <header className="p-5 w-full justify-between flex absolute top-0">
             <div className="flex items-center">
                 <div className={`shadow-md items-center flex p-2 rounded-md bg-white gap-1 relative ${pomodoroIsPlaying && "opacity-10"}`}>
                     <div 

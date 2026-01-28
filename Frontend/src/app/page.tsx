@@ -16,22 +16,30 @@ export default function Page() {
 	// If it is, the we setTodaysAccumulatedSeconds (0) and startSaving fromTodays.
 	return(
 		<>
-		<div className={`w-full h-[100dvh] ${isBreakOrSession === "session" ? "bg-beigeAccent" : `${isBreakOrSession === "break" ? "bg-blueAccent" : "bg-greenAccent"}`}`}>
-			<HeaderComponent />
-			{whereIsGlobal === "pomodoro" && <>
-				<PomodoroComponent />
-			</>}
-			{whereIsGlobal === "history" && <>
-				<HistoryComponent />
-			</>}
+		<div className="w-full flex flex-col md:flex-row gap-2 *:rounded-md *:w-full p-2 h-[100dvh]">
+			<div className={`h-full ${isBreakOrSession === "session" ? "bg-beigeAccent" : `${isBreakOrSession === "break" ? "bg-blueAccent" : "bg-greenAccent"}`}`}>
+				<div className={`w-full relative h-full`}>
+					<HeaderComponent />
+					{whereIsGlobal === "pomodoro" && <>
+						<PomodoroComponent />
+					</>}
+					{whereIsGlobal === "history" && <>
+						<HistoryComponent />
+					</>}
+				</div>
+				{(currentDoneCycle === cycleNumber) ? <>
+					{(isBreakOrSession === "session" && startModalVisible) && <StartLongBreakModalComponent/>}
+				</> : <>
+					{(isBreakOrSession === "longBreak" && startModalVisible) && <StartSessionModalComponent />}
+					{(isBreakOrSession === "session" && startModalVisible) && <StartBreakModalComponent />}	
+					{(isBreakOrSession === "break" && startModalVisible) && <StartSessionModalComponent />}
+				</>}
+			</div>
+			<div className="">
+				
+			</div>
 		</div>
-		{(currentDoneCycle === cycleNumber) ? <>
-			{(isBreakOrSession === "session" && startModalVisible) && <StartLongBreakModalComponent/>}
-		</> : <>
-			{(isBreakOrSession === "longBreak" && startModalVisible) && <StartSessionModalComponent />}
-			{(isBreakOrSession === "session" && startModalVisible) && <StartBreakModalComponent />}	
-			{(isBreakOrSession === "break" && startModalVisible) && <StartSessionModalComponent />}
-		</>}
+		
 		</>
 	)
 }
